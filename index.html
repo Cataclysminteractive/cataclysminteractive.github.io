@@ -37,68 +37,56 @@
             background: rgba(252, 219, 58, 0.7);
         }
 
-        /* Navbar styles */
-        .navbar {
-            display: none; /* Initially hide the navbar */
-            background-color: #FCDB3A;
-            position: fixed;
-            top: 50px; /* Adjust the top position to move the navbar lower */
-            left: 0;
-            bottom: 0;
-            z-index: 998;
+        @media only screen and (max-width: 1024px) {
+            .navbar-menu {
+                display: block;
+                opacity: 0;
+                position: relative; /* or float: left; width: 100%;*/
+                left: 0;
+                right: 0;
+
+                transform: translateY(-50%);
+                transition: all 0.4s ease-in-out;
+                pointer-events: none;
+            }
+
+            .navbar-menu.is-active {
+                opacity: 1;
+                transform: none;
+                pointer-events: auto;
+            }
         }
 
-        .navbar-menu {
-            flex-direction: column; /* Display menu items vertically */
-            align-items: flex-start; /* Align items to the left */
-            padding: 1rem;
-        }
 
-        .navbar-item {
-            padding: 0.5rem 0; /* Adjust padding for vertical spacing */
-            cursor: pointer;
-            transition: color 0.3s; /* Add transition for color change */
-        }
-
-        .navbar-item:hover {
-            color: #333; /* Change color on hover */
-        }
-
-        .navbar-burger {
-            cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            justify-content: center; /* Center horizontally within the trigger area */
-            z-index: 999;
-            transition: color 0.3s; /* Add transition for color change */
-        }
-
-        .navbar-burger:hover {
-            color: #333; /* Change color on hover */
-        }
     </style>
 </head>
 <body>
-    <!-- Navbar trigger -->
-    <div class="navbar-hover" style="position: absolute; top: 0; left: 0; padding: 10px; cursor: pointer;">
-        <!-- Use the Font Awesome bars icon -->
-        <div class="navbar-burger">
-            <i class="fas fa-bars"></i>
-        </div>
-    </div>
 
-    <!-- Navbar content -->
-    <nav class="navbar">
-        <div class="navbar-menu">
-            <!-- Add the "navbar-item-hover" class to apply the same hover effect -->
-            <a class="navbar-item navbar-item-hover">Home</a>
-            <a class="navbar-item navbar-item-hover">About Us</a>
-            <a class="navbar-item navbar-item-hover">Our Games</a>
-            <!-- Add more navbar items as needed with the "navbar-item-hover" class -->
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="">
+            <img src="https://i.imgur.com/JPNGkfo.png" width="28" height="28">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-    </nav>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="">
+              Home
+            </a>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+            </div>
+          </div>
+        </div>
+      </nav>
 
     <section class="hero is-primary is-fullheight">
         <div class="hero-body">
@@ -144,16 +132,27 @@
             <p>&copy; 2023 Cataclysm Interactive</p>
         </div>
     </footer>
-
     <script>
-        // Show/hide the navbar on hover
-        const navbarHover = document.querySelector('.navbar-hover');
-        const navbar = document.querySelector('.navbar');
-        navbarHover.addEventListener('mouseenter', () => {
-            navbar.style.display = 'block';
+        document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
         });
-        navbar.addEventListener('mouseleave', () => {
-            navbar.style.display = 'none';
+        });
+
         });
     </script>
 </body>
