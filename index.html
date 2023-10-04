@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="icon" type="image/png" href="https://i.imgur.com/JPNGkfo.png">
+    <!-- Add Font Awesome kit script -->
+    <script src="https://kit.fontawesome.com/401d508782.js" crossorigin="anonymous"></script>
     <title>Cataclysm Interactive - Home</title>
     <style>
         body {
             background-color: #FCDB3A;
+            overflow: overlay;
         }
 
         .hero.is-primary {
@@ -18,32 +21,91 @@
         .logo {
             max-width: 100%;
             height: auto;
-            clip-path: circle(50%); /* Create a circular cutout */
+            clip-path: circle(50%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 15px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(187, 163, 44, 0.7);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(252, 219, 58, 0.7);
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: none; /* Initially hide the navbar */
+            background-color: #FCDB3A;
+            position: fixed;
+            top: 50px; /* Adjust the top position to move the navbar lower */
+            left: 0;
+            bottom: 0;
+            z-index: 998;
+        }
+
+        .navbar-menu {
+            flex-direction: column; /* Display menu items vertically */
+            align-items: flex-start; /* Align items to the left */
+            padding: 1rem;
+        }
+
+        .navbar-item {
+            padding: 0.5rem 0; /* Adjust padding for vertical spacing */
+            cursor: pointer;
+            transition: color 0.3s; /* Add transition for color change */
+        }
+
+        .navbar-item:hover {
+            color: #333; /* Change color on hover */
+        }
+
+        .navbar-burger {
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            justify-content: center; /* Center horizontally within the trigger area */
+            z-index: 999;
+            transition: color 0.3s; /* Add transition for color change */
+        }
+
+        .navbar-burger:hover {
+            color: #333; /* Change color on hover */
         }
     </style>
 </head>
 <body>
+    <!-- Navbar trigger -->
+    <div class="navbar-hover" style="position: absolute; top: 0; left: 0; padding: 10px; cursor: pointer;">
+        <!-- Use the Font Awesome bars icon -->
+        <div class="navbar-burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <!-- Navbar content -->
+    <nav class="navbar">
+        <div class="navbar-menu">
+            <!-- Add the "navbar-item-hover" class to apply the same hover effect -->
+            <a class="navbar-item navbar-item-hover">Home</a>
+            <a class="navbar-item navbar-item-hover">About Us</a>
+            <a class="navbar-item navbar-item-hover">Our Games</a>
+            <!-- Add more navbar items as needed with the "navbar-item-hover" class -->
+        </div>
+    </nav>
+
     <section class="hero is-primary is-fullheight">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <!-- Logo added here -->
                 <img src="https://i.imgur.com/JPNGkfo.png" alt="Cataclysm Interactive Logo" class="logo">
                 <h2 class="subtitle is-4">yes</h2>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <div class="columns is-centered">
-                <div class="column is-half">
-                    <div class="content">
-                        <h3 class="title is-3">About Us</h3>
-                        <p>
-                            Welcome to Cataclysm Interactive... We are exited to feast on your soul...
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -62,10 +124,37 @@
         </div>
     </section>
 
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-half">
+                    <div class="content">
+                        <h3 class="title is-3">About Us</h3>
+                        <p>
+                            Welcome to Cataclysm Interactive... We are excited to feast on your soul...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="content has-text-centered">
             <p>&copy; 2023 Cataclysm Interactive</p>
         </div>
     </footer>
+
+    <script>
+        // Show/hide the navbar on hover
+        const navbarHover = document.querySelector('.navbar-hover');
+        const navbar = document.querySelector('.navbar');
+        navbarHover.addEventListener('mouseenter', () => {
+            navbar.style.display = 'block';
+        });
+        navbar.addEventListener('mouseleave', () => {
+            navbar.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
