@@ -9,14 +9,6 @@
     <script src="https://kit.fontawesome.com/401d508782.js" crossorigin="anonymous"></script>
     <title>Cataclysm Interactive - Home</title>
     <style>
-        body {
-            background-color: #FCDB3A;
-            overflow: overlay;
-        }
-
-        .hero.is-primary {
-            background-color: #FCDB3A;
-        }
 
         .logo {
             max-width: 100%;
@@ -30,11 +22,11 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(187, 163, 44, 0.7);
+            background: rgba(52, 51, 45, 0.7);
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(252, 219, 58, 0.7);
+            background: rgba(204, 201, 185, 0.7);
         }
 
         @media only screen and (max-width: 1024px) {
@@ -59,6 +51,13 @@
                 pointer-events: auto;
             }
         }
+
+        .show {
+            transition: opacity 600ms;
+        }
+        .hide {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +78,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="x.html">
-              Home
+                Home
             </a>
             <a class="navbar-item" href="status.html">
                 Status
@@ -92,7 +91,7 @@
         </div>
       </nav>
 
-    <div id="bots"></div>
+    <div id="bots" class="hide"></div>
 
     <footer class="footer">
         <div class="content has-text-centered">
@@ -137,6 +136,7 @@
                 s = {'online':'Stable', 'idle':'Unstable', 'dnd':'Unstable', 'offline':'Offline'}
                 d.innerHTML += `<section class="hero ${c[element['status']]} is-small"><div class="hero-body"><p class="title">${element['username']}</p><p class="subtitle">${s[element['status']]}</p></div></section>`
             });
+            document.getElementById('bots').classList.replace('hide', 'show');
         } else {
             console.log(`Error: ${xhr.status}`);
         }
