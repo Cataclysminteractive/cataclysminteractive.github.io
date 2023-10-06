@@ -130,6 +130,13 @@
         if (xhr.readyState == 4 && xhr.status == 200) {
             const data = xhr.response;
             console.log(data);
+            data.forEach(element => {
+                console.log(element)
+                d = document.getElementById('bots')
+                c = {'online':'is-success', 'idle':'is-warning', 'dnd':'is-danger', 'offline':'is-light'}
+                s = {'online':'Stable', 'idle':'Unstable', 'dnd':'Unstable', 'offline':'Offline'}
+                d.innerHTML += `<section class="hero ${c[element['status']]} is-small"><div class="hero-body"><p class="title">${element['username']}</p><p class="subtitle">${s[element['status']]}</p></div></section>`
+            });
         } else {
             console.log(`Error: ${xhr.status}`);
         }
