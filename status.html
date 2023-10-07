@@ -58,6 +58,36 @@
         .hide {
             opacity: 0;
         }
+
+        .c-is-success {
+            background-color: hsl(141, 53%, 53%);
+        }
+
+        .c-is-warning {
+            background-color: hsl(48, 100%, 67%);
+        }
+
+        .c-is-danger {
+            background-color: hsl(348, 100%, 61%);
+        }
+
+        .c-is-primary {
+            background-color: hsl(171, 100%, 41%);
+        }
+
+        .c-is-light {
+            background-color: hsl(0, 0%, 96%);
+        }
+
+        .bm--card-equal-height {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .bm--card-equal-height .bm--card-footer--top-section {
+            margin-top: auto;
+            background-color: #6f92c9;
+        }
     </style>
 </head>
 <body>
@@ -91,7 +121,7 @@
         </div>
       </nav>
 
-    <div id="bots" class="hide"></div>
+    <div class="columns is-centered is-mobile"><div class="column is-11"><div class="columns is-multiline is-centered"id="bots"></div></div></div>
 
     <footer class="footer">
         <div class="content has-text-centered">
@@ -129,13 +159,16 @@
         if (xhr.readyState == 4 && xhr.status == 200) {
             const data = xhr.response;
             console.log(data);
+            d = document.getElementById('bots')
             data.forEach(element => {
                 console.log(element)
                 d = document.getElementById('bots')
                 c = {'online':'is-success', 'idle':'is-warning', 'dnd':'is-danger', 'offline':'is-light'}
                 s = {'online':'Stable', 'idle':'Unstable', 'dnd':'Unstable', 'offline':'Offline'}
-                d.innerHTML += `<section class="hero ${c[element['status']]} is-small"><div class="hero-body"><p class="title">${element['username']}</p><p class="subtitle">${s[element['status']]}</p></div></section>`
+                //d.innerHTML += `<section class="hero ${c[element['status']]} is-small"><div class="hero-body"><p class="title">${element['username']}</p><p class="subtitle">${s[element['status']]}</p></div></section>`
+                d.innerHTML += `<div class="column is-one-quarter"><div class="card c-${c[element['status']]} bm--card-equal-height"><div class="card-content"><div class="media"><div class="media-left"><figure class="image is-48x48"><img src="${element['url']}" alt="LOGO" style="clip-path: circle(50%);"></figure></div><div class="media-content"><p class="title is-4">${element['username']}</p><p class="subtitle is-6">${s[element['status']]}</p></div></div><div class="content"><br></div></div><div class="card-footer bm--card-footer--top-section"><a href="https://discord.com/users/${element['id']}" class="card-footer-item" style="color: white;"><span class="icon-text"><span class="icon"><i class="fa-solid fa-plus"></i></span><span>Add</span></span></a></div></div></div>`
             });
+        
             document.getElementById('bots').classList.replace('hide', 'show');
         } else {
             console.log(`Error: ${xhr.status}`);
