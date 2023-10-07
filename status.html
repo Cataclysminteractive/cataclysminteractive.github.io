@@ -9,24 +9,19 @@
     <script src="https://kit.fontawesome.com/401d508782.js" crossorigin="anonymous"></script>
     <title>Cataclysm Interactive - Home</title>
     <style>
+        body {
+            background-color: #fff;
+            transition: 400ms;
+        }
+
+        body.dark-mode {
+            background-color: hsl(0, 0%, 21%);
+        }
 
         .logo {
             max-width: 100%;
             height: auto;
             clip-path: circle(50%);
-        }
-
-        ::-webkit-scrollbar {
-            width: 15px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(52, 51, 45, 0.7);
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(204, 201, 185, 0.7);
         }
 
         @media only screen and (max-width: 1024px) {
@@ -50,6 +45,50 @@
                 transform: none;
                 pointer-events: auto;
             }
+
+            .navbar.dark-mode .navbar-menu {
+                background-color: hsl(0, 0%, 4%);
+            }
+        }
+
+        .navbar {
+            transition: 400ms;
+        }
+
+        .navbar .navbar-menu .navbar-start .navbar-item {
+            transition: 400ms;
+        }
+
+        .navbar .navbar-menu .navbar-end .navbar-item {
+            transition: 400ms;
+        }
+
+        .navbar .navbar-brand .navbar-burger span {
+            transition: 400ms;
+        }
+
+        .navbar.dark-mode {
+            background-color: hsl(0, 0%, 4%); /* Change the background color for dark mode */
+        }
+
+        .navbar.dark-mode .navbar-menu .navbar-start .navbar-item {
+            color: #fff; /* Change the text color for dark mode */
+        }
+
+        .navbar.dark-mode .navbar-menu .navbar-end .navbar-item {
+            color: #fff; /* Change the text color for dark mode */
+        }
+        .navbar.dark-mode .navbar-brand .navbar-burger span {
+            background-color: #fff; /* Example: Change the burger icon color for dark mode */
+        }
+
+        .inverted {
+            filter: invert(1);
+        }
+
+        #darkModeToggle i {
+            transition: 400ms;
+            width: 16px;
         }
 
         .show {
@@ -59,23 +98,23 @@
             opacity: 0;
         }
 
-        .c-is-success {
+        .card.c-is-success {
             background-color: hsl(141, 53%, 53%);
         }
 
-        .c-is-warning {
+        .card.c-is-warning {
             background-color: hsl(48, 100%, 67%);
         }
 
-        .c-is-danger {
+        .card.c-is-danger {
             background-color: hsl(348, 100%, 61%);
         }
 
-        .c-is-primary {
+        .card.c-is-primary {
             background-color: hsl(171, 100%, 41%);
         }
 
-        .c-is-light {
+        .card.c-is-light {
             background-color: hsl(0, 0%, 96%);
         }
 
@@ -88,15 +127,93 @@
             margin-top: auto;
             background-color: #6f92c9;
         }
+
+        #bot-box {
+            transition: 400ms;
+            margin-top: 0.25rem;
+        }
+
+        #bot-box.dark-mode {
+            background-color: hsl(0, 0%, 21%);
+        }
+
+        #footer {
+            transition: 400ms;
+        }
+
+        #footer.dark-mode {
+            background-color: hsl(0, 0%, 19%)
+        }
+
+        #footer.dark-mode .content p {
+            color: #fff;
+        }
+
+        .card {
+            transition: 400ms;
+        }
+
+        .card.dark-mode .card-content .media .media-content p {
+            color: #fff;
+        }
+
+        .card .card-content .media .media-content p {
+            transition: 400ms;
+        }
+
+        .card .card-footer {
+            transition: 400ms;
+        }
+
+        .card.dark-mode .card-footer {
+            background-color: #3e5374;
+        }
+
+        .card.c-is-success.dark-mode {
+            background-color: hsl(141, 47%, 25%);
+        }
+
+        .card.c-is-warning.dark-mode {
+            background-color: hsl(48, 49%, 29%);
+        }
+
+        .card.c-is-danger.dark-mode {
+            background-color: hsl(347, 61%, 24%);
+        }
+
+        .card.c-is-primary.dark-mode {
+            background-color: hsl(171, 93%, 16%);
+        }
+
+        .card.c-is-light.dark-mode {
+            background-color: hsl(0, 0%, 32%);
+        }
+    </style>
+    <style id="scroll">
+        ::-webkit-scrollbar {
+            width: 15px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(52, 51, 45, 0.7);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(204, 201, 185, 0.7);
+        }
     </style>
 </head>
-<body>
+<body id="body">
 
-    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation" id="navbar">
         <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="https://i.imgur.com/JPNGkfo.png" width="28" height="28">
-          </a>
+            <a class="navbar-item" href="">
+                <img src="https://i.imgur.com/JPNGkfo.png" width="28" height="28" style="clip-path: circle(50%);">
+            </a>
+            <div class="navbar-item" id="darkModeToggle">
+                <i class="fas fa-sun"></i>
+            </div>
       
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
@@ -107,23 +224,21 @@
       
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" href="/">
-                Home
+            <a class="navbar-item" href="">
+              Home
             </a>
             <a class="navbar-item" href="status.html">
                 Status
             </a>
       
           <div class="navbar-end">
-            <div class="navbar-item">
-            </div>
           </div>
         </div>
       </nav>
 
-    <div class="columns is-centered is-mobile"><div class="column is-11"><div class="columns is-multiline is-centered"id="bots"></div></div></div>
+    <div class="columns is-centered is-mobile" id="bot-box"><div class="column is-11"><div class="columns is-multiline is-centered" id="bots"></div></div></div>
 
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="content has-text-centered">
             <p>&copy; 2023 Cataclysm Interactive</p>
         </div>
@@ -174,6 +289,52 @@
             console.log(`Error: ${xhr.status}`);
         }
         };
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        itemsbyid = ['navbar', 'body', 'bot-box', 'footer']
+
+        darkModeToggle.addEventListener('click', () => {
+            scroller = document.getElementById('scroll');
+            
+            // Toggle the icon between sun and moon
+            const icon = darkModeToggle.querySelector('i');
+            if (navbar.classList.contains('dark-mode')) {
+                //for (let i = 0; i < 200; i++) {
+                //    setTimeout(() => {
+               //         if (i < m1.length) {
+                //        scroller.innerHTML = `::-webkit-scrollbar {width: 15px; height: 10px;} ::-webkit-scrollbar-thumb {background: ${m1[m1.length-i]};} ::-webkit-scrollbar-track {background: ${m2[m1.length-i]};}`
+                 //       }
+                //    }, i * 2); // Multiply by 1 ms to create a 1 ms delay
+                //}
+
+                icon.classList.add('fa-sun');
+                icon.classList.remove('fa-moon');
+            } else {
+
+                // for (let i = 0; i < 200; i++) {
+                //     setTimeout(() => {
+                //         if (i < m1.length) {
+                //         scroller.innerHTML = `::-webkit-scrollbar {width: 15px; height: 10px;} ::-webkit-scrollbar-thumb {background: ${m1[i]};} ::-webkit-scrollbar-track {background: ${m2[i]};}`
+                //         }
+                //     }, i * 2); // Multiply by 1 ms to create a 1 ms delay
+                //}
+
+                icon.classList.add('fa-moon');
+                icon.classList.remove('fa-sun');
+            }
+
+            setTimeout(() => {
+                itemsbyid.forEach(element => {
+                    document.getElementById(element).classList.toggle('dark-mode');
+                });
+                icon.classList.toggle('inverted')
+            }, 70);
+
+            var cards = document.getElementsByClassName("card");
+            for (var i = 0; i < cards.length; i++) {
+                cards.item(i).classList.toggle('dark-mode')
+            }
+        });
     </script>
 </body>
 </html>
