@@ -1,0 +1,85 @@
+<style>
+    @media only screen and (max-width: 1024px) {
+        .navbar-menu {
+            display: block;
+            opacity: 0;
+            position: relative;
+            padding: 0;
+            left: 0;
+            right: 0;
+            max-height: 0px;
+            transition: all 0.4s ease-in-out;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .navbar-menu.is-active {
+            max-height: 200px;
+            padding: .5rem .75rem;
+            opacity: 1;
+            transform: none;
+            pointer-events: auto;
+        }
+    }
+</style>
+
+<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="">
+        <img src="https://i.imgur.com/JPNGkfo.png" width="28" height="28">
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="">
+          Home
+        </a>
+        <a class="navbar-item" href="status.html">
+            Status
+        </a>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+        </div>
+      </div>
+    </div>
+  </nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+    });
+    });
+
+    });
+
+    toggle.addEventListener("click", () => {
+        const bodyCheck = body.classList.contains('dark');
+        if (bodyCheck) {
+            body.className = ''
+        } else {
+            body.className = "dark"
+    }
+    })
+</script>
