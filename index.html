@@ -11,30 +11,71 @@
     <style>
         body {
             background-color: #FCDB3A;
-            overflow: overlay;
+            transition: 400ms;
+        }
+
+        body.dark-mode {
+            background-color: hsl(0, 0%, 21%);
+        }
+
+        .hero {
+            transition: 400ms;
         }
 
         .hero.is-primary {
             background-color: #FCDB3A;
         }
 
+        .hero.dark-mode {
+            background-color: hsl(0, 0%, 21%);
+        }
+
+        #our-games {
+            background-color: #ffdd57;
+            transition: 400ms;
+        }
+
+        #our-games.dark-mode .container .columns .column .content h3 {
+            color: #fff;
+        }
+
+        #our-games.dark-mode .container .columns .column .content p {
+            color: #fff;
+        }
+
+        #our-games.dark-mode {
+            background-color: hsl(0, 0%, 19%);
+        }
+
+        #about-us {
+            background-color: #fcdb3a;
+            transition: 400ms;
+        }
+
+        #about-us.dark-mode .container .columns .column .content h3 {
+            color: #fff;
+        }
+
+        #about-us.dark-mode .container .columns .column .content p {
+            color: #fff;
+        }
+
+        #about-us.dark-mode {
+            background-color: hsl(0, 0%, 21%);
+        }
+
+        #footer.dark-mode {
+            background-color: hsl(0, 0%, 19%)
+        }
+
+        #footer.dark-mode .content p {
+            color: #fff;
+        }
+
         .logo {
             max-width: 100%;
             height: auto;
             clip-path: circle(50%);
-        }
-
-        ::-webkit-scrollbar {
-            width: 15px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(187, 163, 44, 0.7);
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(252, 219, 58, 0.7);
         }
 
         @media only screen and (max-width: 1024px) {
@@ -58,16 +99,78 @@
                 transform: none;
                 pointer-events: auto;
             }
+
+            .navbar.dark-mode .navbar-menu {
+                background-color: hsl(0, 0%, 4%);
+            }
+        }
+        
+
+        .navbar {
+            transition: 400ms;
+        }
+
+        .navbar .navbar-menu .navbar-start .navbar-item {
+            transition: 400ms;
+        }
+
+        .navbar .navbar-menu .navbar-end .navbar-item {
+            transition: 400ms;
+        }
+
+        .navbar .navbar-brand .navbar-burger span {
+            transition: 400ms;
+        }
+
+        .navbar.dark-mode {
+            background-color: hsl(0, 0%, 4%); /* Change the background color for dark mode */
+        }
+
+        .navbar.dark-mode .navbar-menu .navbar-start .navbar-item {
+            color: #fff; /* Change the text color for dark mode */
+        }
+
+        .navbar.dark-mode .navbar-menu .navbar-end .navbar-item {
+            color: #fff; /* Change the text color for dark mode */
+        }
+        .navbar.dark-mode .navbar-brand .navbar-burger span {
+            background-color: #fff; /* Example: Change the burger icon color for dark mode */
+        }
+
+        .inverted {
+            filter: invert(1);
+        }
+
+        #darkModeToggle i {
+            transition: 400ms;
+            width: 16px;
+        }
+    </style>
+    <style id="scroll">
+        ::-webkit-scrollbar {
+            width: 15px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(187, 163, 44, 0.7);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(252, 219, 58, 0.7);
         }
     </style>
 </head>
-<body>
+<body id="body">
 
-    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation" id="navbar">
         <div class="navbar-brand">
-          <a class="navbar-item" href="">
-            <img src="https://i.imgur.com/JPNGkfo.png" width="28" height="28">
-          </a>
+            <a class="navbar-item" href="">
+                <img src="https://i.imgur.com/JPNGkfo.png" width="28" height="28" style="clip-path: circle(50%);">
+            </a>
+            <div class="navbar-item" id="darkModeToggle">
+                <i class="fas fa-sun"></i>
+            </div>
       
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
@@ -86,23 +189,21 @@
             </a>
       
           <div class="navbar-end">
-            <div class="navbar-item">
-            </div>
           </div>
         </div>
       </nav>
 
-    <section class="hero is-primary is-fullheight">
+    <section class="hero is-primary is-fullheight" id="hero">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <!-- Logo added here -->
                 <img src="https://i.imgur.com/JPNGkfo.png" alt="Cataclysm Interactive Logo" class="logo">
-                <h2 class="subtitle is-4">hi!</h2>
+                <h2 class="subtitle is-4">yes</h2>
             </div>
         </div>
     </section>
 
-    <section class="section has-background-grey-light">
+    <section class="section" id="our-games">
         <div class="container">
             <div class="columns">
                 <div class="column">
@@ -116,7 +217,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="about-us">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-half">
@@ -131,7 +232,7 @@
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="content has-text-centered">
             <p>&copy; 2023 Cataclysm Interactive</p>
         </div>
@@ -157,6 +258,67 @@
         });
         });
 
+        });
+
+        function interpolateColor(startColor, endColor, steps) {
+            const colorList = [];
+            
+            for (let step = 0; step < steps; step++) {
+                const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * step / (steps - 1));
+                const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * step / (steps - 1));
+                const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * step / (steps - 1));
+                const a = (startColor[3] + (endColor[3] - startColor[3]) * step / (steps - 1)).toFixed(2);
+                colorList.push(`rgba(${r}, ${g}, ${b}, ${a})`);
+            }
+            
+            return colorList;
+        }
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        itemsbyid = ['navbar', 'body', 'hero', 'our-games', 'about-us', 'footer']
+
+        const m1 = interpolateColor([187, 163, 44, 0.7], [38, 38, 38, 1], 200);
+        const m2 = interpolateColor([252, 219, 58, 0.7], [64, 64, 64, 1], 200);
+        console.log(m1)
+        console.log(m2)
+
+        darkModeToggle.addEventListener('click', () => {
+            scroller = document.getElementById('scroll');
+            
+            // Toggle the icon between sun and moon
+            const icon = darkModeToggle.querySelector('i');
+            if (navbar.classList.contains('dark-mode')) {
+                for (let i = 0; i < 200; i++) {
+                    setTimeout(() => {
+                        if (i < m1.length) {
+                        scroller.innerHTML = `::-webkit-scrollbar {width: 15px; height: 10px;} ::-webkit-scrollbar-thumb {background: ${m1[m1.length-i]};} ::-webkit-scrollbar-track {background: ${m2[m1.length-i]};}`
+                        }
+                    }, i * 2); // Multiply by 1 ms to create a 1 ms delay
+                }
+
+                icon.classList.add('fa-sun');
+                icon.classList.remove('fa-moon');
+            } else {
+
+                for (let i = 0; i < 200; i++) {
+                    setTimeout(() => {
+                        if (i < m1.length) {
+                        scroller.innerHTML = `::-webkit-scrollbar {width: 15px; height: 10px;} ::-webkit-scrollbar-thumb {background: ${m1[i]};} ::-webkit-scrollbar-track {background: ${m2[i]};}`
+                        }
+                    }, i * 2); // Multiply by 1 ms to create a 1 ms delay
+                }
+
+                icon.classList.add('fa-moon');
+                icon.classList.remove('fa-sun');
+            }
+
+            setTimeout(() => {
+                itemsbyid.forEach(element => {
+                    document.getElementById(element).classList.toggle('dark-mode');
+                });
+                icon.classList.toggle('inverted')
+            }, 70);
+            
         });
     </script>
 </body>
